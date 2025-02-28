@@ -95,10 +95,20 @@ fun NewsItem(
                         )
                     }
                 }
+                IconButton(onClick = {
+                    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, article.url)
+                    }
+                    context.startActivity(Intent.createChooser(shareIntent, "Share via"))
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription = stringResource(id = R.string.share),
+                        tint = Color.Unspecified
+                    )
+                }
             }
         }
     }
 }
-
-
-
