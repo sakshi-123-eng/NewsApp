@@ -81,7 +81,7 @@ fun WebPage(
             FloatingActionButton(
                 onClick = {
                     moveBack(true)
-                    viewModel.saveArticle(article.copy(isSaved = true))
+                    viewModel.saveArticle(article.copy(isSaved = true, id = 0))
                 },
                 modifier = Modifier
                     .padding(16.dp)
