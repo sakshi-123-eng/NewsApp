@@ -1,4 +1,4 @@
-package com.sakshi.newsapp.localdb
+package com.sakshi.newsapp.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -7,13 +7,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sakshi.newsapp.R
 import com.sakshi.newsapp.model.NewsArticle
 import com.sakshi.newsapp.viewmodel.NewsViewModel
@@ -24,7 +24,7 @@ fun SavedScreen(
     viewModel: NewsViewModel = hiltViewModel(),
     onReadMoreClicked: (NewsArticle) -> Unit,
 ) {
-    val savedNewsList by viewModel.newsSavedState.collectAsState()
+    val savedNewsList by viewModel.newsSavedState.collectAsStateWithLifecycle()
     Box(
         modifier = Modifier
             .fillMaxSize()

@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sakshi.newsapp.composables.BottomNavItem
 import com.sakshi.newsapp.composables.BottomNavigationBar
-import com.sakshi.newsapp.composables.WebPage
+import com.sakshi.newsapp.composables.WebPageScreen
 import com.sakshi.newsapp.model.NewsArticle
 import com.sakshi.newsapp.ui.theme.NewsAppTheme
 import com.sakshi.newsapp.viewmodel.NewsViewModel
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                             if (article.url.isNullOrEmpty()) {
                                 Text(text = getString(R.string.article_not_found))
                             } else {
-                                WebPage(article = article, viewModel = viewModel) {
+                                WebPageScreen(article = article, viewModel = viewModel) {
                                     newsArticle.value = null
                                     if (it) {
                                         bottomNavStartDestination.value = BottomNavItem.Saved
@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
                         }
                     } ?: run {
                         BottomNavigationBar(
-                            bottomNavStartDestination.value,
+                            bottomNavStartDestination = bottomNavStartDestination.value,
                             viewModel = viewModel,
                             enableDarkTheme = enableDarkTheme.value,
                             onReadMoreClicked = {

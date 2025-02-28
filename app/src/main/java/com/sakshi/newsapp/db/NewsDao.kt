@@ -1,4 +1,4 @@
-package com.sakshi.newsapp.localdb
+package com.sakshi.newsapp.db
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.sakshi.newsapp.model.NewsArticle
 
-import androidx.room.*
 import com.sakshi.newsapp.utils.NEWS_ARTICLES_TABLE
 import kotlinx.coroutines.flow.Flow
 
@@ -19,7 +18,7 @@ interface NewsDao {
     suspend fun clearAllLatestNewsArticles()
 
     @Query("SELECT * FROM $NEWS_ARTICLES_TABLE WHERE isSaved = 0")
-    fun getAllNews(): List<NewsArticle>
+    fun getAllLatestNews(): List<NewsArticle>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveNewsArticle(savedArticle: NewsArticle)
     @Query("SELECT * FROM $NEWS_ARTICLES_TABLE WHERE isSaved = 1")

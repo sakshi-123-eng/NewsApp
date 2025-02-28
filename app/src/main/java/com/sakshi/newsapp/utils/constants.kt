@@ -17,4 +17,6 @@ const val NEWS_DB = "news_db"
 const val NEWS_ARTICLES_TABLE = "news_articles_table"
 
 const val VM_TAG = "NewsViewModel"
-const val SOME_THING_WENT_WRONG = "Something Went Wrong"
+const val SOMETHING_WENT_WRONG = "Something Went Wrong"
+const val SHARE_VIA = "Share Via"
+const val TEXT_PLAIN = "text/plain"

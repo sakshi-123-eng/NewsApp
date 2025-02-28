@@ -2,8 +2,8 @@ package com.sakshi.newsapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.sakshi.newsapp.localdb.NewsDao
-import com.sakshi.newsapp.localdb.NewsDatabase
+import com.sakshi.newsapp.db.NewsDao
+import com.sakshi.newsapp.db.NewsDatabase
 import com.sakshi.newsapp.network.NewsApiService
 import com.sakshi.newsapp.utils.BASE_URL
 import com.sakshi.newsapp.utils.NEWS_DB

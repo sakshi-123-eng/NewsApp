@@ -3,10 +3,11 @@
     <string name="article_not_found">Article not found</string>
     <string name="save">Save</string>
     <string name="share">Share</string>
-    <string name="share_via">Share via</string>
     <string name="dark_theme">Dark</string>
     <string name="light_theme">Light</string>
     <string name="read_more">Read More…</string>
     <string name="no_news">No News Available</string>
     <string name="no_saved_items_found">No Saved Items Found</string>
+    <string name="news_image">News Image</string>
+    <string name="delete">Delete</string>
 </resources>
