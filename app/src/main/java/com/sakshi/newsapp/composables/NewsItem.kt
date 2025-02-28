@@ -1,5 +1,6 @@
 package com.sakshi.newsapp.composables
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -20,6 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -35,6 +39,7 @@ fun NewsItem(
     onReadMoreClicked: (NewsArticle) -> Unit,
     deleteNewsArticle: () -> Unit = {}
 ) {
+    val context = LocalContext.current
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -48,27 +53,32 @@ fun NewsItem(
             AsyncImage(
                 model = article.urlToImage,
                 contentDescription = "News Image",
+                placeholder = painterResource(id =R.drawable.news_image_placeholder),
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(16.dp))
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = article.title.toString(),
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(end = 8.dp, start = 8.dp)
-            )
-            Text(
-                text = article.description.toString(),
-                fontSize = 14.sp,
-                color = Color.Gray,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(top = 8.dp, end = 8.dp, start = 8.dp)
-            )
+            article.title?.let {
+                Text(
+                    text = it,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(end = 8.dp, start = 8.dp)
+                )
+            }
+            article.description?.let {
+                Text(
+                    text = it,
+                    fontSize = 14.sp,
+                    color = Color.Gray,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(top = 8.dp, end = 8.dp, start = 8.dp)
+                )
+            }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End

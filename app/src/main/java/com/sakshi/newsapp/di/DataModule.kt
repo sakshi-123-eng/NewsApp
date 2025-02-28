@@ -6,6 +6,7 @@ import com.sakshi.newsapp.localdb.NewsDao
 import com.sakshi.newsapp.localdb.NewsDatabase
 import com.sakshi.newsapp.network.NewsApiService
 import com.sakshi.newsapp.utils.BASE_URL
+import com.sakshi.newsapp.utils.NEWS_DB
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,7 +40,7 @@ object DataModule {
         return Room.databaseBuilder(
             context.applicationContext,
             NewsDatabase::class.java,
-            "news_db"
+            NEWS_DB
         ).build()
     }
 

@@ -7,16 +7,25 @@ import androidx.room.Query
 import com.sakshi.newsapp.model.NewsArticle
 
 import androidx.room.*
+import com.sakshi.newsapp.utils.NEWS_ARTICLES_TABLE
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertArticle(article: NewsArticle)
+    suspend fun insertLatestNewsArticle(articles: List<NewsArticle>)
 
-    @Query("SELECT * FROM news_articles")
-    fun getSavedArticles(): Flow<List<NewsArticle>>
+    @Query("DELETE FROM $NEWS_ARTICLES_TABLE WHERE isSaved = 0")
+    suspend fun clearAllLatestNewsArticles()
 
-    @Delete
-    suspend fun deleteArticle(article: NewsArticle)
+    @Query("SELECT * FROM $NEWS_ARTICLES_TABLE WHERE isSaved = 0")
+    fun getAllNews(): List<NewsArticle>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveNewsArticle(savedArticle: NewsArticle)
+    @Query("SELECT * FROM $NEWS_ARTICLES_TABLE WHERE isSaved = 1")
+    fun getSavedNewsArticles(): Flow<List<NewsArticle>>
+
+    @Query("DELETE FROM $NEWS_ARTICLES_TABLE WHERE id = :articleId AND isSaved = 1")
+    suspend fun deleteSavedArticle(articleId: Int)
+
 }

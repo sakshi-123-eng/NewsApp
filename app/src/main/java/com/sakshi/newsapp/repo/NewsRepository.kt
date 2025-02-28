@@ -2,37 +2,43 @@ package com.sakshi.newsapp.repo
 
 import com.sakshi.newsapp.localdb.NewsDao
 import com.sakshi.newsapp.model.NewsArticle
-import com.sakshi.newsapp.model.News
 import com.sakshi.newsapp.network.NewsApiService
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import retrofit2.Response
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class NewsRepository @Inject constructor(
     private val apiService: NewsApiService,
-    private val newsArticleDao: NewsDao
+    private val newsDao: NewsDao
 ) {
-
-    fun getLatestNews(apiKey: String): Flow<Response<News>> = flow {
-        emit(apiService.getLatestNews(apiKey = apiKey))
-    }.flowOn(Dispatchers.IO)
-
-    suspend fun saveArticle(article: NewsArticle) {
-        newsArticleDao.insertArticle(article)
+    fun getLatestNews(apiKey: String): Flow<List<NewsArticle>> = flow {
+        try {
+            val response = apiService.getLatestNews(apiKey = apiKey)
+            if (response.isSuccessful) {
+                response.body()?.let { newsResponse ->
+                    emit(newsResponse.articles)
+                    newsDao.clearAllLatestNewsArticles()
+                    newsDao.insertLatestNewsArticle(newsResponse.articles)
+                }
+            }
+        } catch (ioException: IOException){
+            emit(newsDao.getAllNews())
+        }
     }
 
-    suspend fun deleteArticle(article: NewsArticle) {
-        newsArticleDao.deleteArticle(article)
+    suspend fun saveNewsArticle(article: NewsArticle) {
+        newsDao.saveNewsArticle(article)
+    }
+
+    suspend fun deleteSavedArticle(article: NewsArticle) {
+        newsDao.deleteSavedArticle(article.id)
     }
 
     fun getSavedArticles(): Flow<List<NewsArticle>> {
-        return newsArticleDao.getSavedArticles()
+        return newsDao.getSavedNewsArticles()
     }
-
 }
 

@@ -43,7 +43,7 @@ fun HomeScreen(
                 val articles = (newsState as NewsState.Success).articles
                 if (articles.isNotEmpty()) {
                     LazyColumn {
-                        items(articles) { item ->
+                        items(items = articles, key = {item -> item }) { item ->
                             NewsItem(article = item, onReadMoreClicked = onReadMoreClicked)
                         }
                     }
