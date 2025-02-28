@@ -1,6 +1,6 @@
 package com.sakshi.newsapp.repo
 
-import com.sakshi.newsapp.localdb.NewsDao
+import com.sakshi.newsapp.db.NewsDao
 import com.sakshi.newsapp.model.NewsArticle
 import com.sakshi.newsapp.network.NewsApiService
 import kotlinx.coroutines.flow.Flow
@@ -23,9 +23,11 @@ class NewsRepository @Inject constructor(
                     newsDao.clearAllLatestNewsArticles()
                     newsDao.insertLatestNewsArticle(newsResponse.articles)
                 }
+            } else {
+                emit(newsDao.getAllLatestNews())
             }
-        } catch (ioException: IOException){
-            emit(newsDao.getAllNews())
+        } catch (ioException: IOException) {
+            emit(newsDao.getAllLatestNews())
         }
     }
 

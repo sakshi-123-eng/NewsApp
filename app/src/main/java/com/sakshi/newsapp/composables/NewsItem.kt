@@ -32,6 +32,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.sakshi.newsapp.R
 import com.sakshi.newsapp.model.NewsArticle
+import com.sakshi.newsapp.utils.SHARE_VIA
+import com.sakshi.newsapp.utils.TEXT_PLAIN
 
 @Composable
 fun NewsItem(
@@ -52,7 +54,7 @@ fun NewsItem(
         ) {
             AsyncImage(
                 model = article.urlToImage,
-                contentDescription = "News Image",
+                contentDescription = stringResource(R.string.news_image),
                 placeholder = painterResource(id =R.drawable.news_image_placeholder),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -90,17 +92,17 @@ fun NewsItem(
                     IconButton(onClick = { deleteNewsArticle() }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete",
+                            contentDescription = stringResource(R.string.delete),
                             tint = Color.Unspecified
                         )
                     }
                 }
                 IconButton(onClick = {
                     val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                        type = "text/plain"
+                        type = TEXT_PLAIN
                         putExtra(Intent.EXTRA_TEXT, article.url)
                     }
-                    context.startActivity(Intent.createChooser(shareIntent, "Share via"))
+                    context.startActivity(Intent.createChooser(shareIntent,SHARE_VIA))
                 }) {
                     Icon(
                         imageVector = Icons.Default.Share,

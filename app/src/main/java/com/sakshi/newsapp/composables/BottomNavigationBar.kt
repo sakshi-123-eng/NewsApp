@@ -41,7 +41,7 @@ fun BottomNavigationBar(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    onThemeChanged(!enableDarkTheme)
+                    onThemeChanged(enableDarkTheme.not())
                 },
                 modifier = Modifier
                     .padding(16.dp),

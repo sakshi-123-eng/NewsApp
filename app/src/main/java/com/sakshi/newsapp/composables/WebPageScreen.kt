@@ -10,7 +10,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -22,7 +21,7 @@ import com.sakshi.newsapp.viewmodel.NewsViewModel
 
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun WebPage(
+fun WebPageScreen(
     viewModel: NewsViewModel = hiltViewModel(),
     article: NewsArticle,
     moveBack: (Boolean) -> Unit
@@ -68,27 +67,27 @@ fun WebPage(
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        AndroidView(
-            factory = { webView },
-            modifier = Modifier
-                .fillMaxSize()
-                .alpha(if (isLoading.value) 0f else 1f)
-        )
         if (isLoading.value) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        }
-        if (!isLoading.value && article.isSaved.not()) {
-            FloatingActionButton(
-                onClick = {
-                    moveBack(true)
-                    viewModel.saveArticle(article.copy(isSaved = true, id = 0))
-                },
+        } else {
+            AndroidView(
+                factory = { webView },
                 modifier = Modifier
-                    .padding(16.dp)
-                    .align(Alignment.BottomEnd),
-                containerColor = MaterialTheme.colorScheme.primary
-            ) {
-                Text(text = stringResource(R.string.save))
+                    .fillMaxSize()
+            )
+            if (article.isSaved.not()) {
+                FloatingActionButton(
+                    onClick = {
+                        moveBack(true)
+                        viewModel.saveArticle(article.copy(isSaved = true, id = 0))
+                    },
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .align(Alignment.BottomEnd),
+                    containerColor = MaterialTheme.colorScheme.primary
+                ) {
+                    Text(text = stringResource(R.string.save))
+                }
             }
         }
     }
