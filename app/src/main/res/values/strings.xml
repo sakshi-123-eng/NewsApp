@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="article_not_found">Article not found</string>
+    <string name="save">Save</string>
+    <string name="read_more">Read More…</string>
+    <string name="no_news">No News Available</string>
+</resources>
