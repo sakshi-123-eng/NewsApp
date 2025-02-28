@@ -1,4 +1,4 @@
-# 📰 NewsApp
+# 📰 [NewsApp](https://drive.google.com/file/d/1tZWnRVDdVOAMESFOCrtTFGxtZwzUv1mf)
 
 An Android app that fetches and displays the latest news from NewsAPI. 📰
 Built with Kotlin, it follows the MVVM architecture, uses Dagger-Hilt for dependency injection, and features a Jetpack Compose UI. It also supports offline-first functionality with a Room database. 🚀
@@ -64,13 +64,3 @@ Built with Kotlin, it follows the MVVM architecture, uses Dagger-Hilt for depend
 
 ## 📌 Demo Video
 https://github.com/user-attachments/assets/979e6434-e6c6-4869-91ed-340645debf39
-
-
-## 📱 Apk link
-```sh
-   https://drive.google.com/file/d/1tZWnRVDdVOAMESFOCrtTFGxtZwzUv1mf
-   ```
-
-
-
-
