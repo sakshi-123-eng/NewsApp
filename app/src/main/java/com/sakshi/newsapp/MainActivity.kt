@@ -25,14 +25,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            NewsAppTheme {
+            val enableDarkTheme = remember {
+                mutableStateOf(false)
+            }
+            val viewModel: NewsViewModel = hiltViewModel()
+            NewsAppTheme(darkTheme = enableDarkTheme.value) {
                 val newsArticle = remember {
                     mutableStateOf<NewsArticle?>(null)
                 }
                 val bottomNavStartDestination = remember {
                     mutableStateOf<BottomNavItem>(BottomNavItem.Home)
                 }
-                val viewModel: NewsViewModel = hiltViewModel()
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -58,10 +61,15 @@ class MainActivity : ComponentActivity() {
                     } ?: run {
                         BottomNavigationBar(
                             bottomNavStartDestination.value,
-                            viewModel = viewModel
-                        ) {
-                            newsArticle.value = it
-                        }
+                            viewModel = viewModel,
+                            enableDarkTheme = enableDarkTheme.value,
+                            onReadMoreClicked = {
+                                newsArticle.value = it
+                            },
+                            onThemeChanged = {
+                                enableDarkTheme.value = it
+                            }
+                        )
                     }
 
                 }
