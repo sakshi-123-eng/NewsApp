@@ -58,12 +58,19 @@ Built with Kotlin, it follows the MVVM architecture, uses Dagger-Hilt for depend
    ```
 
 2️⃣ **Open in Android Studio** 📂
-
 3️⃣ **Synd, Build and Run the app!** 🚀
 
 <br>
 
-## 📌 Screenshots
+## 📌 Demo Video
+https://github.com/user-attachments/assets/979e6434-e6c6-4869-91ed-340645debf39
+
+
+## 📱 Apk link
+```sh
+   https://drive.google.com/file/d/1tZWnRVDdVOAMESFOCrtTFGxtZwzUv1mf
+   ```
+
 
 
 
